@@ -16,9 +16,9 @@ public final class GeneratedPluginRegistrant {
   private static final String TAG = "GeneratedPluginRegistrant";
   public static void registerWith(@NonNull FlutterEngine flutterEngine) {
     try {
-      flutterEngine.getPlugins().add(new com.example.deeplink_sdk.DeeplinkSdkPlugin());
+      flutterEngine.getPlugins().add(new com.deeplink.sdk.DeeplinkSdkPlugin());
     } catch (Exception e) {
-      Log.e(TAG, "Error registering plugin deeplink_sdk, com.example.deeplink_sdk.DeeplinkSdkPlugin", e);
+      Log.e(TAG, "Error registering plugin deeplink_sdk, com.deeplink.sdk.DeeplinkSdkPlugin", e);
     }
   }
 }

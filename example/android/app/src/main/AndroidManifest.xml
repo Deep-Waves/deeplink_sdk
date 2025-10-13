@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.deeplink_sdk_example">
+    package="com.deeplink.sdk">
     
     <application
         android:label="deeplink_sdk_example"

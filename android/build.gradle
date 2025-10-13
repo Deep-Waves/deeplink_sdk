@@ -1,4 +1,4 @@
-group 'com.example.deeplink_sdk'
+group 'com.deeplink.sdk'
 version '1.0'
 
 buildscript {

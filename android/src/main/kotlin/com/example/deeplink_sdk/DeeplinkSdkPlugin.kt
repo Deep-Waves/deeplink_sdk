@@ -1,4 +1,4 @@
-package com.example.deeplink_sdk
+package com.deeplink.sdk
 
 import android.content.Intent
 import android.net.Uri

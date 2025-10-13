@@ -27,7 +27,7 @@ flutter:
   plugin:
     platforms:
       android:
-        package: com.example.deeplink_sdk
+        package: com.deeplink.sdk
         pluginClass: DeeplinkSdkPlugin
       ios:
         pluginClass: DeeplinkSdkPlugin
