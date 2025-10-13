@@ -4,10 +4,10 @@ import 'models/deeplink_data.dart';
 abstract class DeepLinkObserver {
   /// Called when a deep link is received
   void onDeepLinkReceived(DeepLinkData data);
-  
+
   /// Called when a deep link is successfully handled
   void onDeepLinkHandled(DeepLinkData data);
-  
+
   /// Called when a deep link fails to be handled
   void onDeepLinkFailed(DeepLinkData data, String error);
 }
@@ -32,7 +32,8 @@ class LoggingDeepLinkObserver extends DeepLinkObserver {
 
 /// Analytics observer for tracking deep link events
 class AnalyticsDeepLinkObserver extends DeepLinkObserver {
-  final void Function(String event, Map<String, dynamic> parameters)? trackEvent;
+  final void Function(String event, Map<String, dynamic> parameters)?
+      trackEvent;
 
   AnalyticsDeepLinkObserver({this.trackEvent});
 

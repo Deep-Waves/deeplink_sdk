@@ -75,19 +75,19 @@ class DeepLinkData {
 enum DeepLinkSource {
   /// Deep link from external source (e.g., browser, other app)
   external,
-  
+
   /// Deep link generated internally within the app
   internal,
-  
+
   /// Deep link from push notification
   notification,
-  
+
   /// Deep link from QR code scan
   qrCode,
-  
+
   /// Deep link from NFC tag
   nfc,
-  
+
   /// Unknown source
   unknown,
 }

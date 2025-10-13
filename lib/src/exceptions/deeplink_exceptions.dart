@@ -16,7 +16,8 @@ class DeepLinkException implements Exception {
 
 /// Exception thrown when a deep link is invalid
 class InvalidDeepLinkException extends DeepLinkException {
-  InvalidDeepLinkException(String message, [dynamic cause]) : super(message, cause);
+  InvalidDeepLinkException(String message, [dynamic cause])
+      : super(message, cause);
 }
 
 /// Exception thrown when no route is found for a deep link

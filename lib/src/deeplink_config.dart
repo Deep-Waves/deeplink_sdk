@@ -2,25 +2,25 @@
 class DeepLinkConfig {
   /// Default scheme for internal navigation
   final String defaultScheme;
-  
+
   /// Default host for internal navigation
   final String defaultHost;
-  
+
   /// List of allowed schemes for incoming deep links
   final List<String> allowedSchemes;
-  
+
   /// List of allowed hosts for incoming deep links
   final List<String> allowedHosts;
-  
+
   /// Whether to handle deep links when app is in background
   final bool handleInBackground;
-  
+
   /// Whether to log deep link events
   final bool enableLogging;
-  
+
   /// Custom error handler for deep link failures
   final Function(String url, dynamic error)? errorHandler;
-  
+
   /// Whether to automatically handle app links (Android) and universal links (iOS)
   final bool autoHandleAppLinks;
 

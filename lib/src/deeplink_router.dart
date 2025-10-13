@@ -4,7 +4,8 @@ import 'models/route_params.dart';
 import 'deeplink_route.dart';
 
 /// Type definition for route handlers
-typedef RouteHandler = Future<bool> Function(BuildContext context, RouteParams params);
+typedef RouteHandler = Future<bool> Function(
+    BuildContext context, RouteParams params);
 
 /// Router for handling deep link navigation
 class DeepLinkRouter {
@@ -34,7 +35,8 @@ class DeepLinkRouter {
   /// Route a deep link to the appropriate handler
   Future<bool> route(DeepLinkData deepLinkData) async {
     if (_context == null) {
-      debugPrint('Warning: No context set for routing. Call setContext() first.');
+      debugPrint(
+          'Warning: No context set for routing. Call setContext() first.');
       return false;
     }
 
@@ -57,7 +59,7 @@ class DeepLinkRouter {
     for (final entry in _routes.entries) {
       final routePattern = entry.key;
       final route = entry.value;
-      
+
       final matchResult = _matchPattern(routePattern, path);
       if (matchResult != null) {
         final params = RouteParams(
@@ -103,10 +105,10 @@ class DeepLinkRouter {
     }
 
     final params = <String, String>{};
-    
+
     for (int i = 0; i < patternSegments.length; i++) {
       final patternSegment = patternSegments[i];
-      
+
       if (patternSegment.startsWith(':')) {
         // This is a parameter
         if (i >= pathSegments.length) return null;

@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.0.1] - 2024-10-13
+
+### Fixed
+- Code formatting issues to comply with Dart formatter standards
+- Improved pub.dev score by fixing static analysis issues
+
 ## [1.0.0] - 2024-01-01
 
 ### Initial Release

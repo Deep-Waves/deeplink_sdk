@@ -7,7 +7,7 @@ void main() {
   group('DeepLinkConfig Tests', () {
     test('should create default config', () {
       final config = DeepLinkConfig.defaultConfig();
-      
+
       expect(config.defaultScheme, 'app');
       expect(config.defaultHost, 'deeplink');
       expect(config.allowedSchemes, isEmpty);
@@ -19,7 +19,7 @@ void main() {
 
     test('should create development config', () {
       final config = DeepLinkConfig.development();
-      
+
       expect(config.enableLogging, isTrue);
       expect(config.allowedSchemes, contains('http'));
       expect(config.allowedSchemes, contains('https'));
@@ -31,7 +31,7 @@ void main() {
         allowedSchemes: ['myapp', 'https'],
         allowedHosts: ['example.com'],
       );
-      
+
       expect(config.enableLogging, isFalse);
       expect(config.handleInBackground, isTrue);
       expect(config.allowedSchemes, contains('myapp'));
@@ -45,7 +45,7 @@ void main() {
         defaultScheme: 'custom',
         enableLogging: true,
       );
-      
+
       expect(copied.defaultScheme, 'custom');
       expect(copied.enableLogging, isTrue);
       expect(copied.defaultHost, original.defaultHost);
@@ -60,7 +60,7 @@ void main() {
         timestamp: DateTime(2024, 1, 1),
         source: DeepLinkSource.external,
       );
-      
+
       expect(data.scheme, 'myapp');
       expect(data.host, 'example.com');
       expect(data.path, '/product/123');
@@ -76,10 +76,10 @@ void main() {
         source: DeepLinkSource.notification,
         metadata: {'key': 'value'},
       );
-      
+
       final json = original.toJson();
       final restored = DeepLinkData.fromJson(json);
-      
+
       expect(restored.uri.toString(), original.uri.toString());
       expect(restored.source, original.source);
       expect(restored.metadata, original.metadata);
@@ -92,7 +92,7 @@ void main() {
         timestamp: DateTime.now(),
         source: DeepLinkSource.external,
       );
-      
+
       expect(data.hasQueryParameter('foo'), isTrue);
       expect(data.hasQueryParameter('baz'), isTrue);
       expect(data.hasQueryParameter('missing'), isFalse);
@@ -107,9 +107,10 @@ void main() {
         path: '/user/123/profile',
         pathParameters: {'userId': '123'},
         queryParameters: {'tab': 'posts', 'sort': 'recent'},
-        uri: Uri.parse('myapp://example.com/user/123/profile?tab=posts&sort=recent'),
+        uri: Uri.parse(
+            'myapp://example.com/user/123/profile?tab=posts&sort=recent'),
       );
-      
+
       expect(params.pathParam('userId'), '123');
       expect(params.queryParam('tab'), 'posts');
       expect(params.queryParam('sort'), 'recent');
@@ -124,11 +125,11 @@ void main() {
         queryParameters: {'count': '10', 'price': '19.99', 'featured': 'false'},
         uri: Uri.parse('test://test'),
       );
-      
+
       expect(params.pathParamAsInt('id'), 42);
       expect(params.pathParamAsDouble('ratio'), 3.14);
       expect(params.pathParamAsBool('active'), isTrue);
-      
+
       expect(params.queryParamAsInt('count'), 10);
       expect(params.queryParamAsDouble('price'), 19.99);
       expect(params.queryParamAsBool('featured'), isFalse);
@@ -141,7 +142,7 @@ void main() {
         queryParameters: {},
         uri: Uri.parse('test://test'),
       );
-      
+
       expect(params.pathParam('missing'), isNull);
       expect(params.queryParam('missing'), isNull);
       expect(params.pathParamAsInt('missing'), isNull);
@@ -157,7 +158,7 @@ void main() {
         queryParameters: {'queryKey': 'value'},
         uri: Uri.parse('test://test'),
       );
-      
+
       expect(params.hasPathParam('pathKey'), isTrue);
       expect(params.hasPathParam('missing'), isFalse);
       expect(params.hasQueryParam('queryKey'), isTrue);
@@ -171,7 +172,7 @@ void main() {
         queryParameters: {'name': 'test'},
         uri: Uri.parse('test://test'),
       );
-      
+
       final all = params.allParameters;
       expect(all['id'], '123');
       expect(all['name'], 'test');
@@ -195,16 +196,16 @@ void main() {
         called = true;
         return true;
       });
-      
+
       expect(router.hasRoute('/test'), isTrue);
       expect(router.registeredPatterns, contains('/test'));
-      
+
       final deepLink = DeepLinkData(
         uri: Uri.parse('myapp://example.com/test'),
         timestamp: DateTime.now(),
         source: DeepLinkSource.external,
       );
-      
+
       final result = await router.route(deepLink);
       expect(result, isTrue);
       expect(called, isTrue);
@@ -216,13 +217,13 @@ void main() {
         capturedId = params.pathParam('id');
         return true;
       });
-      
+
       final deepLink = DeepLinkData(
         uri: Uri.parse('myapp://example.com/product/123'),
         timestamp: DateTime.now(),
         source: DeepLinkSource.external,
       );
-      
+
       final result = await router.route(deepLink);
       expect(result, isTrue);
       expect(capturedId, '123');
@@ -231,19 +232,20 @@ void main() {
     test('should match routes with multiple parameters', () async {
       String? userId;
       String? postId;
-      
-      router.registerRoute('/user/:userId/post/:postId', (context, params) async {
+
+      router.registerRoute('/user/:userId/post/:postId',
+          (context, params) async {
         userId = params.pathParam('userId');
         postId = params.pathParam('postId');
         return true;
       });
-      
+
       final deepLink = DeepLinkData(
         uri: Uri.parse('myapp://example.com/user/456/post/789'),
         timestamp: DateTime.now(),
         source: DeepLinkSource.external,
       );
-      
+
       final result = await router.route(deepLink);
       expect(result, isTrue);
       expect(userId, '456');
@@ -252,18 +254,18 @@ void main() {
 
     test('should match wildcard routes', () async {
       String? section;
-      
+
       router.registerRoute('/settings/*section', (context, params) async {
         section = params.pathParam('section');
         return true;
       });
-      
+
       final deepLink = DeepLinkData(
         uri: Uri.parse('myapp://example.com/settings/privacy/general'),
         timestamp: DateTime.now(),
         source: DeepLinkSource.external,
       );
-      
+
       final result = await router.route(deepLink);
       expect(result, isTrue);
       expect(section, 'privacy/general');
@@ -271,18 +273,18 @@ void main() {
 
     test('should pass query parameters', () async {
       Map<String, String>? queryParams;
-      
+
       router.registerRoute('/search', (context, params) async {
         queryParams = params.queryParameters;
         return true;
       });
-      
+
       final deepLink = DeepLinkData(
         uri: Uri.parse('myapp://example.com/search?q=flutter&category=mobile'),
         timestamp: DateTime.now(),
         source: DeepLinkSource.external,
       );
-      
+
       final result = await router.route(deepLink);
       expect(result, isTrue);
       expect(queryParams?['q'], 'flutter');
@@ -291,13 +293,13 @@ void main() {
 
     test('should return false for unmatched routes', () async {
       router.registerRoute('/test', (context, params) async => true);
-      
+
       final deepLink = DeepLinkData(
         uri: Uri.parse('myapp://example.com/unknown'),
         timestamp: DateTime.now(),
         source: DeepLinkSource.external,
       );
-      
+
       final result = await router.route(deepLink);
       expect(result, isFalse);
     });
@@ -305,7 +307,7 @@ void main() {
     test('should remove routes', () {
       router.registerRoute('/test', (context, params) async => true);
       expect(router.hasRoute('/test'), isTrue);
-      
+
       router.removeRoute('/test');
       expect(router.hasRoute('/test'), isFalse);
     });
@@ -314,7 +316,7 @@ void main() {
       router.registerRoute('/test1', (context, params) async => true);
       router.registerRoute('/test2', (context, params) async => true);
       expect(router.registeredPatterns.length, 2);
-      
+
       router.clearRoutes();
       expect(router.registeredPatterns, isEmpty);
     });
@@ -328,7 +330,7 @@ void main() {
         name: 'TestRoute',
         metadata: {'key': 'value'},
       );
-      
+
       expect(route.pattern, '/test');
       expect(route.name, 'TestRoute');
       expect(route.metadata?['key'], 'value');
@@ -339,17 +341,17 @@ void main() {
         pattern: '/test',
         handler: (context, params) async => true,
       );
-      
+
       final route2 = DeepLinkRoute(
         pattern: '/test',
         handler: (context, params) async => false,
       );
-      
+
       final route3 = DeepLinkRoute(
         pattern: '/other',
         handler: (context, params) async => true,
       );
-      
+
       expect(route1, equals(route2));
       expect(route1, isNot(equals(route3)));
     });
@@ -397,12 +399,14 @@ class _MockBuildContext implements BuildContext {
   bool get mounted => true;
 
   @override
-  InheritedWidget dependOnInheritedElement(InheritedElement ancestor, {Object? aspect}) {
+  InheritedWidget dependOnInheritedElement(InheritedElement ancestor,
+      {Object? aspect}) {
     throw UnimplementedError();
   }
 
   @override
-  T? dependOnInheritedWidgetOfExactType<T extends InheritedWidget>({Object? aspect}) {
+  T? dependOnInheritedWidgetOfExactType<T extends InheritedWidget>(
+      {Object? aspect}) {
     return null;
   }
 
@@ -412,12 +416,14 @@ class _MockBuildContext implements BuildContext {
   }
 
   @override
-  DiagnosticsNode describeElement(String name, {DiagnosticsTreeStyle style = DiagnosticsTreeStyle.errorProperty}) {
+  DiagnosticsNode describeElement(String name,
+      {DiagnosticsTreeStyle style = DiagnosticsTreeStyle.errorProperty}) {
     throw UnimplementedError();
   }
 
   @override
-  List<DiagnosticsNode> describeMissingAncestor({required Type expectedAncestorType}) {
+  List<DiagnosticsNode> describeMissingAncestor(
+      {required Type expectedAncestorType}) {
     throw UnimplementedError();
   }
 
@@ -427,7 +433,8 @@ class _MockBuildContext implements BuildContext {
   }
 
   @override
-  DiagnosticsNode describeWidget(String name, {DiagnosticsTreeStyle style = DiagnosticsTreeStyle.errorProperty}) {
+  DiagnosticsNode describeWidget(String name,
+      {DiagnosticsTreeStyle style = DiagnosticsTreeStyle.errorProperty}) {
     throw UnimplementedError();
   }
 
@@ -457,7 +464,8 @@ class _MockBuildContext implements BuildContext {
   }
 
   @override
-  InheritedElement? getElementForInheritedWidgetOfExactType<T extends InheritedWidget>() {
+  InheritedElement?
+      getElementForInheritedWidgetOfExactType<T extends InheritedWidget>() {
     return null;
   }
 

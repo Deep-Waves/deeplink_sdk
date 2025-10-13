@@ -10,7 +10,7 @@ import 'exceptions/deeplink_exceptions.dart';
 /// Main handler for deep links in the application
 class DeepLinkHandler {
   static DeepLinkHandler? _instance;
-  
+
   /// Get the singleton instance of DeepLinkHandler
   static DeepLinkHandler get instance {
     _instance ??= DeepLinkHandler._internal();
@@ -19,14 +19,17 @@ class DeepLinkHandler {
 
   DeepLinkHandler._internal();
 
-  static const services.MethodChannel _channel = services.MethodChannel('deeplink_sdk');
-  static const services.EventChannel _eventChannel = services.EventChannel('deeplink_sdk/events');
-  
+  static const services.MethodChannel _channel =
+      services.MethodChannel('deeplink_sdk');
+  static const services.EventChannel _eventChannel =
+      services.EventChannel('deeplink_sdk/events');
+
   final DeepLinkRouter router = DeepLinkRouter();
   DeepLinkConfig? _config;
-  
+
   StreamSubscription<String>? _linkSubscription;
-  final StreamController<DeepLinkData> _deepLinkController = StreamController<DeepLinkData>.broadcast();
+  final StreamController<DeepLinkData> _deepLinkController =
+      StreamController<DeepLinkData>.broadcast();
   final List<DeepLinkObserver> _observers = [];
 
   /// Stream of incoming deep links
@@ -38,17 +41,17 @@ class DeepLinkHandler {
     List<DeepLinkObserver>? observers,
   }) async {
     _config = config;
-    
+
     if (observers != null) {
       _observers.addAll(observers);
     }
 
     // Set up method channel for platform communication
     _channel.setMethodCallHandler(_handleMethodCall);
-    
+
     // Listen for deep links
     _startListening();
-    
+
     // Check for initial link (app opened via deep link)
     await _checkInitialLink();
   }
@@ -67,7 +70,7 @@ class DeepLinkHandler {
   Future<bool> handleDeepLink(String url) async {
     try {
       final uri = Uri.parse(url);
-      
+
       // Validate the deep link
       if (!_isValidDeepLink(uri)) {
         throw InvalidDeepLinkException('Invalid deep link: $url');
@@ -90,7 +93,7 @@ class DeepLinkHandler {
 
       // Route the deep link
       final handled = await router.route(deepLinkData);
-      
+
       if (handled) {
         for (final observer in _observers) {
           observer.onDeepLinkHandled(deepLinkData);
@@ -118,12 +121,14 @@ class DeepLinkHandler {
   }
 
   /// Navigate to a deep link internally
-  Future<bool> navigateTo(String path, {Map<String, dynamic>? parameters}) async {
+  Future<bool> navigateTo(String path,
+      {Map<String, dynamic>? parameters}) async {
     final uri = Uri(
       scheme: _config?.defaultScheme ?? 'app',
       host: _config?.defaultHost ?? 'deeplink',
       path: path,
-      queryParameters: parameters?.map((key, value) => MapEntry(key, value.toString())),
+      queryParameters:
+          parameters?.map((key, value) => MapEntry(key, value.toString())),
     );
 
     final deepLinkData = DeepLinkData(
@@ -178,13 +183,13 @@ class DeepLinkHandler {
     if (_config == null) return true;
 
     // Check allowed schemes
-    if (_config!.allowedSchemes.isNotEmpty && 
+    if (_config!.allowedSchemes.isNotEmpty &&
         !_config!.allowedSchemes.contains(uri.scheme)) {
       return false;
     }
 
     // Check allowed hosts
-    if (_config!.allowedHosts.isNotEmpty && 
+    if (_config!.allowedHosts.isNotEmpty &&
         !_config!.allowedHosts.contains(uri.host)) {
       return false;
     }
