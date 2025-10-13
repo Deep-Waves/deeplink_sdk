@@ -1,0 +1,40 @@
+name: deeplink_sdk
+description: A comprehensive Flutter SDK for handling deep links on Android and iOS platforms with easy routing and configuration.
+version: 1.0.0
+homepage: https://github.com/sanketjariwala/deeplink_sdk
+repository: https://github.com/sanketjariwala/deeplink_sdk
+issue_tracker: https://github.com/sanketjariwala/deeplink_sdk/issues
+documentation: https://github.com/sanketjariwala/deeplink_sdk#readme
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+  flutter: '>=3.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  plugin_platform_interface: ^2.1.6
+  meta: ^1.9.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+  mockito: ^5.4.2
+  build_runner: ^2.4.6
+
+flutter:
+  plugin:
+    platforms:
+      android:
+        package: com.example.deeplink_sdk
+        pluginClass: DeeplinkSdkPlugin
+      ios:
+        pluginClass: DeeplinkSdkPlugin
+
+topics:
+  - deeplink
+  - deep-linking
+  - navigation
+  - routing
+  - universal-links
