@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.0.4] - 2024-10-13
+
+### Fixed
+- Fix Package name issue
+
 ## [1.0.3] - 2024-10-13
 
 ### Fixed

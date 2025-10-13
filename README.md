@@ -19,7 +19,7 @@ Add `deeplink_sdk` to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  deeplink_sdk: ^1.0.2
+  deeplink_sdk: ^1.0.4
 ```
 
 Then run:

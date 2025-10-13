@@ -1,6 +1,6 @@
 name: deeplink_sdk
 description: A comprehensive Flutter SDK for handling deep links on Android and iOS platforms with easy routing and configuration.
-version: 1.0.3
+version: 1.0.4
 homepage: https://github.com/sanketJariwala9464/deeplink_sdk
 repository: https://github.com/sanketJariwala9464/deeplink_sdk
 issue_tracker: https://github.com/sanketJariwala9464/deeplink_sdk/issues
