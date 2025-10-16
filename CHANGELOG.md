@@ -1,29 +1,34 @@
 # Changelog
 
-## [1.0.4] - 2024-10-13
+## [1.0.5] - 2025-10-16
+
+### Fixed
+- Bug Fixes
+
+## [1.0.4] - 2025-10-13
 
 ### Fixed
 - Fix Package name issue
 
-## [1.0.3] - 2024-10-13
+## [1.0.3] - 2025-10-13
 
 ### Fixed
 - Fixed Android plugin class location issue 
 - Ensured Android source files are properly included in published package
 - Corrected package structure for Android implementation
 
-## [1.0.2] - 2024-10-13
+## [1.0.2] - 2025-10-13
 
 ### Fixed
 - Minor documentation updates
 
-## [1.0.1] - 2024-10-13
+## [1.0.1] - 2025-10-13
 
 ### Fixed
 - Code formatting issues to comply with Dart formatter standards
 - Improved pub.dev score by fixing static analysis issues
 
-## [1.0.0] - 2024-01-01
+## [1.0.0] - 2025-10-10
 
 ### Initial Release
 

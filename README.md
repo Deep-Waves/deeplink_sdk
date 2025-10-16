@@ -19,7 +19,7 @@ Add `deeplink_sdk` to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  deeplink_sdk: ^1.0.4
+  deeplink_sdk: ^1.0.5
 ```
 
 Then run:
@@ -407,6 +407,12 @@ Data about a received deep link.
 - Verify the route pattern matches the incoming URL path
 - Ensure the context is set before routing
 
+## 🧑‍💻 Authors & Contributors
+
+- **Meet Bhanabhagwanwala** – [meeeet-dev](https://github.com/meeeet-dev)
+- **Sanket Jariwala** – [sanketJariwala9464](https://github.com/sanketJariwala9464)
+- **Bhargav Jariwala** – [BhargavJari](https://github.com/BhargavJari)
+
 ## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
@@ -417,4 +423,4 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## Support
 
-For issues, questions, or suggestions, please file an issue on the [GitHub repository](https://github.com/yourusername/deeplink_sdk).
+For issues, questions, or suggestions, please file an issue on the [GitHub repository](https://github.com/Deep-Waves/deeplink_sdk).
