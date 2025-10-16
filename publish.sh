@@ -65,7 +65,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
         echo "View your package at: https://pub.dev/packages/deeplink_sdk"
         echo ""
         echo "Next steps:"
-        echo "1. Create GitHub repository: https://github.com/sanketJariwala9464/deeplink_sdk.git"
+        echo "1. Create GitHub repository: https://github.com/Deep-Waves/deeplink_sdk.git"
         echo "2. Push code to GitHub"
         echo "3. Create a release tag (v1.0.0)"
         echo "4. Monitor package score on pub.dev"
